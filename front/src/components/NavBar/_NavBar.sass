@@ -1,0 +1,29 @@
+@import '../../mixin'
+
+.navContainer 
+  padding: 25px 0
+  width: 100%
+  @include flexContainer(row, space-between)
+
+.navContainer a
+  text-decoration: none
+
+.navContainer_logo, .navContainer_contact
+  cursor: pointer
+  font-size: 20px
+
+
+.navContainer_logo
+  @include flexContainer(row, space-between)
+
+
+.navContainer_logoIcon
+  display: inline-block
+  width: 23px
+  height: 20px
+  margin: 0 3px
+
+.navContainer_logoIcon img
+  width: 100%
+  height: 100%
+

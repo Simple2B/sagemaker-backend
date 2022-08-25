@@ -1,0 +1,33 @@
+@import '../../variables'
+@import '../../mixin'
+
+
+.titleContainer
+  width: 100%
+  @include flexContainer(row, space-between)
+
+.titleContainer_img, .titleContainer_img img
+  width: 100%
+
+.titleContainer_img
+  width: 30%
+
+.titleContainer_text
+  width: 70%
+
+
+.titleContainer_text
+  @include flexContainer(column, center)
+  
+
+.mainText
+  padding: 7px 0
+  font-family: $secondary-font
+  font-size: 30px
+  font-weight: 900
+
+.subText
+  font-family: $secondary-font
+  font-size: 14px
+  text-transform: uppercase
+

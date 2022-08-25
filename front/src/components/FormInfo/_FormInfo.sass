@@ -1,0 +1,95 @@
+@import '../../variables'
+@import '../../mixin'
+
+.containerFormInfo
+  width: 100%
+  padding: 30px 0
+  @include flexContainer(column, space-between)
+
+.containerFormInfo_title
+  align-self: flex-start
+  font-size: 24px
+  font-weight: 900
+
+.containerFormInfo_input
+  position: relative
+  width: 100%
+  padding: 7px 5px
+  align-self: flex-start
+  @include flexContainer(column, space-between)
+
+.inputLabel
+  align-self: flex-start
+  font-size: 12px
+  padding: 3px 1px
+
+
+.inputContainer
+  @include flexContainer(column, space-between)
+  width: 100%
+  
+.inputContainer input
+  align-self: flex-start
+  width: 40%
+  padding: 7px
+  border: 1px solid $grey-color-opacity
+  border-radius: 3px
+  background-color: $yellow-color-opacity
+  outline-color: $yellow-color
+
+@media (max-width: 500px)
+  .inputContainer input
+    width: 100%
+
+.widthSize input
+  width: 100%
+
+.heightSize input
+  padding: 11px 7px
+
+.containerFormInfo_error
+  align-self: flex-start
+  position: absolute
+  color: $color-error
+  font-size: 13px
+  background-color: rgba(255, 255, 255)
+
+.errorContainerInput input
+  outline-color: $color-error
+
+.inputContainer select 
+  align-self: flex-start
+  width: 41%
+  padding: 7px
+  border: 1px solid $grey-color-opacity
+  background-color: $yellow-color-opacity
+  outline-color: $yellow-color
+
+@media (max-width: 500px)
+  .inputContainer select
+    width: 100%
+
+#study option
+  color: $yellow-color-opacity
+  text-transform: capitalize
+
+.containerFormInfo_btn
+  width: 100%
+  @include flexContainer(column, space-between)
+
+.containerFormInfo_btn .btn
+  align-self: flex-start
+  width: 40%
+  text-align: center
+  margin: 20px 5px
+  padding: 8px 5px
+  background-color: $yellow-color
+  color: $btn-color
+  font-weight: 700
+  border-radius: 5px
+  cursor: pointer
+
+@media (max-width: 500px)
+  .containerFormInfo_btn .btn
+    margin: 20px auto
+    width: 99%

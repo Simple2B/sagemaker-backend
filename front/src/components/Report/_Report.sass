@@ -1,0 +1,53 @@
+@import '../../variables'
+@import '../../mixin'
+
+
+.containerReports
+    width: 100%
+    @include flexContainer(column, space-between)
+
+.report
+    width: 100%
+    align-self: flex-start
+    @include flexContainer(column, space-between)
+
+.report_title
+    padding: 7px 0
+    align-self: flex-start
+    font-size: 16px
+    font-weight: 700
+
+.report_subTitle
+    padding: 0 20px
+    align-self: flex-start
+    font-size: 12px
+    color: $grey-color
+
+.report_data
+    width: 100%
+    padding: 5px 20px
+    align-self: flex-start
+    @include flexContainer(row, space-between)
+
+.dataTitle
+    width: 35%
+    text-align: left
+
+.dataValue
+    width: 57%
+    text-align: left
+    @include flexContainer(row, space-between)
+
+.textDataValue
+
+
+.viewDataValue
+    width: 68%
+    
+
+.viewDataValue_color
+    display: inline-block
+    height: 30px
+    border: 1px solid $grey-color-opacity
+    background-color: $yellow-color
+    transition: width .3s easy-in-out

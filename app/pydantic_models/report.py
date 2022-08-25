@@ -14,7 +14,4 @@ class ReportRequest(ReportModel):
 
 
 class ReportResponse(ResponseMessage):
-    all_embeddings: dict = Field(
-        {'A': [4.089589595794678, ], 'B': [-0.15814849734306335, ]},
-        description='all_embeddings'
-        )
+    all_embeddings: list = Field([4, 1], description='all_embeddings')

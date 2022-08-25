@@ -1,0 +1,11 @@
+FROM node:14.19
+
+WORKDIR /app
+
+COPY front/package*.json ./
+
+RUN yarn install
+
+COPY front/. .
+
+CMD [ "yarn", "start" ]

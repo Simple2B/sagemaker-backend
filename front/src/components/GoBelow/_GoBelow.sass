@@ -1,0 +1,31 @@
+@import '../../variables'
+@import '../../mixin'
+
+.containerGoBelow
+  position: relative
+  padding: 55px 0
+  @include flexContainer(column, center)
+
+.containerGoBelow_text
+  padding: 3px
+
+.containerGoBelow_arrow
+  position: absolute
+  top: 80px
+  cursor: pointer
+  border: solid $yellow-color
+  border-width: 0 3px 3px 0
+  display: inline-block
+  padding: 3px
+  transform: rotate(45deg)
+  animation: jumpInfinite 1.5s infinite
+
+@keyframes jumpInfinite 
+  0% 
+    margin-top: 0
+  
+  50% 
+    margin-top: 7px
+  
+  100% 
+    margin-top: 0

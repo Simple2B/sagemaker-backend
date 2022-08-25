@@ -1,0 +1,40 @@
+@import '../../variables'
+@import '../../mixin'
+
+.containerInfo
+  align-self: flex-start
+  // @include flexContainer(row, space-between)
+
+.containerInfo_title
+  padding: 7px 0
+  font-family: $secondary-font
+  font-size: 25px
+  font-weight: 900
+
+.text_itemsContainer
+  @include flexContainer(column, space-between)
+
+.containerInfo_text
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  flex-wrap: wrap
+
+.text_subTitle, .text_item
+  align-self: flex-start
+  font-family: $sub-font
+
+.text_subTitle
+  font-size: 24px
+
+.text_item
+  font-size: 19px
+  margin: 3px 5px
+  
+.text_itemSquare
+  display: inline-block
+  margin-right: 5px
+  width: 10px
+  height: 17px
+  border: 1px solid $yellow-color
+  background-color: $yellow-color

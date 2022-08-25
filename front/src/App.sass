@@ -1,0 +1,22 @@
+@import 'common'
+@import 'variables'
+@import 'mixin'
+
+.containerApp 
+  width: 100vw
+  text-align: center
+
+.wrapperApp
+  width: 90%
+  margin: 0 auto
+  @include flexContainer(column, center)
+
+.reportTitle
+  font-size: 24px
+  font-weight: 700
+  cursor: pointer
+
+@import 'components/NavBar/_NavBar'
+@import 'components/GoBelow/_GoBelow'
+@import 'components/FormInfo/_FormInfo'
+@import 'components/Loader/_Loader'

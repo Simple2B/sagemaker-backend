@@ -1,6 +1,5 @@
 from app.pydantic_models import ReportRequest, ReportResponse
 from app.pydantic_models import ResponseMessage
-# from flask_jwt_extended import create_access_token, jwt_required, current_user
 from flask_openapi3.models import Tag
 from app.views.blueprint import BlueprintApi
 from app.logger import logger
@@ -61,120 +60,31 @@ def report_post(body: ReportRequest):
     except Exception:
         return ResponseMessage(success=False, description='Something went wrong').json()
 
-    key1 = str(all_embeddings["A"]).strip("[]")
-
-    request_data = {"key1": key1, "key2": "sociologyclass"}
-    # ml_request = {"key1": key1, "key2": "sociologycit"}
-
-    result = requests.post(URL_RESULT, json=request_data)
-
-    best_n = numpy.argsort(-numpy.array(result.json()), axis=1)[:, :5]
-
-    logger.debug("best_n", best_n)
-
     df = pandas.read_csv(f"app/csv_files/{body.study_field}_classes.csv")
 
-    logger.debug(df["num"][best_n[0]])
-    logger.debug(df["title"][df["num"][best_n[0]]])
+    key1 = str(all_embeddings["A"]).strip("[]")
 
-    return ReportResponse(success=True, description='Report successful.', all_embeddings=all_embeddings).json()
+    request_data = {"key1": key1, "key2": f"{body.study_field}class"}
+    request_data_cit = {"key1": key1, "key2": f"{body.study_field}cit"}
 
+    if body.study_field == "sociology":
+        request_data_cit["key2"] = "sociology_cit"
 
-# [
-#   {
-#     name: "Short summary",
-#     subTitle: "Coming soon",
-#     info: [
-#       {
-#         name: "",
-#         value: 0,
-#         text: "",
-#       },
-#     ],
-#   },
-#   {
-#     name: "Related literature",
-#     subTitle: "Coming soon",
-#     info: [
-#       {
-#         name: "",
-#         value: 0,
-#         text: "",
-#       },
-#     ],
-#   },
-#   {
-#     name: "Recommended journals",
-#     subTitle: "",
-#     info: [
-#       {
-#         name: "Journal of XXX",
-#         value: 96,
-#         text: "% fit",
-#       },
-#       {
-#         name: "Journal of YYY",
-#         value: 90,
-#         text: "% fit",
-#       },
-#       {
-#         name: "Economics Journal of XXX",
-#         value: 87,
-#         text: "% fit",
-#       },
-#       {
-#         name: "American Review of XXX",
-#         value: 82,
-#         text: "% fit",
-#       },
-#       {
-#         name: "International Journal of XXX",
-#         value: 78,
-#         text: "% fit",
-#       },
-#     ],
-#   },
-#   {
-#     name: "Citations forecast",
-#     subTitle:
-#       "Relative to other papers in the same field published in the same year",
-#     info: [
-#       {
-#         name: "Top 5% of citations",
-#         value: 50,
-#         text: "% probability",
-#       },
-#       {
-#         name: "Top 10% - Top 5% of citations",
-#         value: 30,
-#         text: "% probability",
-#       },
-#       {
-#         name: "Top 25% - Top 10% of citations",
-#         value: 11,
-#         text: "% probability",
-#       },
-#       {
-#         name: "Top 50% - Top 25% of citations",
-#         value: 8,
-#         text: "% probability",
-#       },
-#       {
-#         name: "Bottom 50% of citations",
-#         value: 1,
-#         text: "% probability",
-#       },
-#     ],
-#   },
-#   {
-#     name: "Index of paper novelty",
-#     subTitle: "Coming soon",
-#     info: [
-#       {
-#         name: "",
-#         value: 0,
-#         text: "",
-#       },
-#     ],
-#   },
-# ];
+    result = requests.post(URL_RESULT, json=request_data)
+    result_cit = requests.post(URL_RESULT, json=request_data_cit)
+
+    logger.debug(f"{len(result.json()[0])}, {len(df)}")
+
+    best_n = numpy.argsort(-numpy.array(result.json()), axis=1)[:, :5]
+    best_n_cit = result_cit.json()
+
+    logger.debug(f"best_n {best_n}")
+    logger.debug(df["title"][df["num"][best_n[0]]].to_list())
+    logger.debug(best_n_cit)
+
+    response_cit = [round(i*100) for i in best_n_cit[0]]
+    response_cit.reverse()
+
+    response_list = [df["title"][df["num"][best_n[0]]].to_list(), response_cit]
+
+    return ReportResponse(success=True, description='Report successful.', all_embeddings=response_list).json()
