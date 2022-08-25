@@ -1,11 +1,16 @@
-FROM node:14.19
+FROM simple2b/react_build
 
-WORKDIR /app
+COPY front/ /src
+RUN build
 
-COPY front/package*.json ./
+# FROM node:14.19
 
-RUN yarn install
+# WORKDIR /app
 
-COPY front/. .
+# COPY front/package*.json ./
 
-CMD [ "yarn", "start" ]
+# RUN yarn install
+
+# COPY front/. .
+
+# CMD [ "yarn", "start" ]

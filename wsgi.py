@@ -1,8 +1,8 @@
 #!/user/bin/env python
-import os
-import click
+# import os
+# import click
 from dotenv import load_dotenv
-from app import create_app, db, models
+from app import create_app, models
 
 INIT_DB_CMD = (
     "poetry run flask db init",
@@ -19,21 +19,21 @@ app = create_app()
 @app.shell_context_processor
 def get_context():
     """Objects exposed here will be automatically available from the shell."""
-    return dict(app=app, db=db, models=models)
+    return dict(app=app, models=models)
 
 
-@app.cli.command()
-def create_db():
-    """Create the configured database."""
-    for cmd in INIT_DB_CMD:
-        os.system(cmd)
+# @app.cli.command()
+# def create_db():
+#     """Create the configured database."""
+#     for cmd in INIT_DB_CMD:
+#         os.system(cmd)
 
 
-@app.cli.command()
-@click.confirmation_option(prompt="Drop all database tables?")
-def drop_db():
-    """Drop the current database."""
-    db.drop_all()
+# @app.cli.command()
+# @click.confirmation_option(prompt="Drop all database tables?")
+# def drop_db():
+#     """Drop the current database."""
+#     db.drop_all()
 
 
 if __name__ == "__main__":

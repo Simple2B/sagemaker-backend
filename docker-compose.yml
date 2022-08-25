@@ -21,5 +21,4 @@ services:
     container_name: react_app
     restart: unless-stopped
     ports:
-      - 127.0.0.1:3000:3000
-    command: yarn start
+      - 127.0.0.1:3000:80
